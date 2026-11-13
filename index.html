@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CarCare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar" id="topbar">
+    <div class="topbar-row">
+      <button type="button" class="icon-btn" id="back" data-action="back" aria-label="Back" hidden></button>
+      <h1 id="title">CarCare</h1>
+      <button type="button" class="switch-btn" data-action="signout" id="switch"></button>
+    </div>
+  </header>
+  <main id="view" tabindex="-1"></main>
+  <nav class="bottomnav" id="nav" aria-label="Main" hidden></nav>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="sheet-root"></div>
+<script src="js/app.js"></script>
+<script src="js/us16-accounts.js"></script>
+<script src="js/us12-reschedule.js"></script>
+<script src="js/us17-notifications.js"></script>
+<script src="js/us09-reminders.js"></script>
+<script src="js/us10-history.js"></script>
+<script src="js/us11-expenses.js"></script>
+<script src="js/us08-center-profile.js"></script>
+<script src="js/us13-reviews.js"></script>
+<script src="js/us14-verification.js"></script>
+<script src="js/us15-dashboard.js"></script>
+<script>CC.start();</script>
+</body>
+</html>
