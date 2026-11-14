@@ -78,7 +78,7 @@ async def main():
         await go('#/d/book?center=c1')
         await pg.click('[data-action=bk-send]'); await pg.wait_for_timeout(100)
         check('US04 request cannot be sent until required fields are chosen', await ev("document.querySelectorAll('.err-msg:not([hidden]), .msg:not([hidden])').length") > 0 or 'Choose' in (await pg.text_content('#view')))
-        await pg.check(f"#bk-cars input[value=\"{kia[0]['id']}\"]", force=True)
+        await pg.click(f"#bk-cars label:has(input[value=\"{kia[0]['id']}\"]) .opt-title")
         await pg.click('[data-action=bk-issue][data-issue=oil]')
         await pg.click('[data-action=bk-date]:not([disabled]) >> nth=2'); await pg.click('[data-action=bk-time]:not([disabled]) >> nth=0')
         await pg.click('[data-action=bk-send]'); await pg.wait_for_timeout(200)
@@ -101,7 +101,7 @@ async def main():
         sl = {s['id']: s for s in await store('slots')}; b1n = [b for b in await store('bookings') if b['id'] == b1['id']][0]
         check('US12 old slot released, new slot taken, booking back to Pending', not sl[b1['slotId']].get('bookingId') and sl[new_slot].get('bookingId') == b1['id'] and b1n['status'] == 'pending' and b1n['slotId'] == new_slot)
         # a second booking to cancel
-        await go('#/d/book?center=c1'); await pg.check(f"#bk-cars input[value=\"{kia[0]['id']}\"]", force=True); await pg.click('[data-action=bk-issue][data-issue=brakes]')
+        await go('#/d/book?center=c1'); await pg.click(f"#bk-cars label:has(input[value=\"{kia[0]['id']}\"]) .opt-title"); await pg.click('[data-action=bk-issue][data-issue=brakes]')
         await pg.click('[data-action=bk-date]:not([disabled]) >> nth=3'); await pg.click('[data-action=bk-time]:not([disabled]) >> nth=0'); await pg.click('[data-action=bk-send]'); await pg.wait_for_timeout(200)
         b2 = sorted([b for b in await store('bookings') if b.get('driverId') == 'u-driver' and b['status'] == 'pending'], key=lambda b: b['createdAt'])[-1]
         await go('#/d/bookings'); await pg.click(f"[data-action=bk-cancel][data-b=\"{b2['id']}\"]"); await pg.wait_for_timeout(150); await shot('us12_cancel_sheet')
